@@ -94,4 +94,5 @@ excel_table_filter/
 ```
 
 ### 👨‍💻 Автор
+- [Ссылка на GitHub](https://github.com/zerin2/excel_table_filter)
 - [Влад Стерлюкин](https://github.com/zerin2)
