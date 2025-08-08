@@ -1,12 +1,14 @@
 from dataclasses import dataclass
-from enum import StrEnum, Enum
 
 
-class TableSettings(Enum):
+@dataclass(frozen=True, slots=True)
+class TableSettings:
     DEFAULT_RESULT_HEADERS = (
         ['ФИО', 'Должность', 'Отдел', 'Дата найма', 'Зарплата']
     )
     TABLE_HEADER_INDICATOR = '№ п/п'
+    CELL_DATE_FORMAT = '%d.%m.%Y'
+
 
 @dataclass(frozen=True, slots=True)
 class ExcelApp:
@@ -29,7 +31,8 @@ class ExcelApp:
     FILTERING_BY = 'Фильтрация по: {filter_column} = {filter_value}'
 
 
-class ExcelAppSettings(Enum):
+@dataclass(frozen=True, slots=True)
+class ExcelAppSettings:
     DEFAULT_EXTENSION = '.xlsx'
     EXCEL_TYPES = ('Excel файлы', '*.xlsx *.xls')
     STATUS_LENGTH = 45
