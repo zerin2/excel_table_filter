@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-from core.enums import ExcelApp, ExcelAppSettings
+from core.constants import ExcelApp, ExcelAppSettings
 from core.exceptions import InvalidFilterValue, InvalidFilterColumnName
 from core.excel_filter import excel_service
 
@@ -42,7 +42,7 @@ class ExcelTableFilterApp:
         self.status_label.config(
             text=self.status_var.format(
                 status=text
-            )[:ExcelAppSettings.STATUS_LENGTH.value]
+            )[:ExcelAppSettings.STATUS_LENGTH]
         )
 
     def init_buttons(self):
@@ -86,7 +86,7 @@ class ExcelTableFilterApp:
         """Открывает диалог выбора файла."""
         self.file_path = filedialog.askopenfilename(
             title=ExcelApp.OPEN_EXCEL_FILE,
-            filetypes=[ExcelAppSettings.EXCEL_TYPES.value]
+            filetypes=[ExcelAppSettings.EXCEL_TYPES]
         )
         self.service.upload_file_path = self.file_path
         if self.file_path:
@@ -96,8 +96,8 @@ class ExcelTableFilterApp:
         """Открывает диалог выбора пути сохранения."""
         full_path = filedialog.asksaveasfilename(
             title=ExcelApp.SAVE_AS,
-            defaultextension=ExcelAppSettings.DEFAULT_EXTENSION.value,
-            filetypes=[ExcelAppSettings.EXCEL_TYPES.value]
+            defaultextension=ExcelAppSettings.DEFAULT_EXTENSION,
+            filetypes=[ExcelAppSettings.EXCEL_TYPES]
         )
         if full_path:
             dir_path, file_name = os.path.split(full_path)

@@ -5,7 +5,7 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Border, Side
 from openpyxl.worksheet.worksheet import Worksheet
 
-from .enums import TableSettings
+from .constants import TableSettings
 from .exceptions import InvalidFilterColumnName, InvalidFilterValue
 
 
@@ -18,7 +18,7 @@ class ExcelTableFilter:
             needed_headers: list[str] = None,
             filter_column: str = None,
             filter_value: str | int | dt.date = None,
-            table_header_indicator: str = TableSettings.TABLE_HEADER_INDICATOR.value,  # noqa
+            table_header_indicator: str = TableSettings.TABLE_HEADER_INDICATOR,
     ):
         self.upload_file_path = upload_file_path
         self.save_file_name = save_file_name
@@ -38,7 +38,7 @@ class ExcelTableFilter:
 
     def init_headers(self):
         if self.needed_headers is None:
-            self.needed_headers = TableSettings.DEFAULT_RESULT_HEADERS.value
+            self.needed_headers = TableSettings.DEFAULT_RESULT_HEADERS
 
     def run_filter(self):
         self.init_headers()
@@ -118,7 +118,10 @@ class ExcelTableFilter:
                     self.filtered_data.append(row)
             elif isinstance(self.filter_value, dt.date):
                 try:
-                    cell_date = dt.datetime.strptime(cell, '%d.%m.%Y')
+                    cell_date = dt.datetime.strptime(
+                        cell,
+                        TableSettings.CELL_DATE_FORMAT,
+                    )
                     if cell_date.date() == self.filter_value.date():  # noqa
                         self.filtered_data.append(row)
                 except (ValueError, Exception):

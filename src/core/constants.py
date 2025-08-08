@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import StrEnum, Enum
 
 
@@ -7,8 +8,8 @@ class TableSettings(Enum):
     )
     TABLE_HEADER_INDICATOR = '№ п/п'
 
-
-class ExcelApp(StrEnum):
+@dataclass(frozen=True, slots=True)
+class ExcelApp:
     TITLE = 'Фильтр Excel-файла'
     OPEN_FILE = 'Открыть файл'
     DOWNLOAD_FILE = 'Файл загружен: '
