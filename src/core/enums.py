@@ -31,3 +31,4 @@ class ExcelApp(StrEnum):
 class ExcelAppSettings(Enum):
     DEFAULT_EXTENSION = '.xlsx'
     EXCEL_TYPES = ('Excel файлы', '*.xlsx *.xls')
+    STATUS_LENGTH = 45

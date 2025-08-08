@@ -39,7 +39,11 @@ class ExcelTableFilterApp:
 
     def set_status(self, text: str):
         """Обновляет текст статуса на экране."""
-        self.status_label.config(text=self.status_var.format(status=text)[:45])
+        self.status_label.config(
+            text=self.status_var.format(
+                status=text
+            )[:ExcelAppSettings.STATUS_LENGTH.value]
+        )
 
     def init_buttons(self):
         """Создаёт и размещает основные кнопки интерфейса."""
